@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Niveshaa — Learn the Stock Market</title>
+<meta name="description" content="Niveshaa is a stock market learning app — 50 structured lessons in English, Tamil &amp; Hindi, a paper trading simulator, daily quiz &amp; leaderboard, and an AI coach to clear your doubts." />
+<link rel="icon" href="assets/favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F7F8FC;
+    --surface-2: #EEF1FB;
+    --text: #12141C;
+    --text-muted: #5B6272;
+    --border: #E7E9F2;
+    --primary: #2E4BDE;
+    --primary-dark: #1F35A6;
+    --primary-tint: #EAEEFF;
+    --gold: #B8862A;
+    --gold-bg: #FBF1DA;
+    --teal: #0B8B87;
+    --teal-bg: #E2F7F6;
+    --purple: #6D28D9;
+    --purple-bg: #F1EAFE;
+    --success: #0F8A46;
+    --navy: #10162B;
+    --navy-2: #171F3B;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B0F1C;
+      --surface: #121729;
+      --surface-2: #1A2036;
+      --text: #EDEFF7;
+      --text-muted: #9AA3BE;
+      --border: #232B45;
+      --primary: #7E93FF;
+      --primary-dark: #B7C2FF;
+      --primary-tint: #1B2350;
+      --gold: #E8C468;
+      --gold-bg: #2A2410;
+      --teal: #35D6CE;
+      --teal-bg: #0E2A29;
+      --purple: #B39CFF;
+      --purple-bg: #241B3E;
+      --success: #3FD17E;
+      --navy: #05070F;
+      --navy-2: #0B0F1C;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B0F1C;
+    --surface: #121729;
+    --surface-2: #1A2036;
+    --text: #EDEFF7;
+    --text-muted: #9AA3BE;
+    --border: #232B45;
+    --primary: #7E93FF;
+    --primary-dark: #B7C2FF;
+    --primary-tint: #1B2350;
+    --gold: #E8C468;
+    --gold-bg: #2A2410;
+    --teal: #35D6CE;
+    --teal-bg: #0E2A29;
+    --purple: #B39CFF;
+    --purple-bg: #241B3E;
+    --success: #3FD17E;
+    --navy: #05070F;
+    --navy-2: #0B0F1C;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Sora', system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; }
+  section { padding-block: 76px; }
+  @media (max-width: 640px) { section { padding-block: 52px; } }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 40;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-block: 12px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Sora'; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  nav.links { display: flex; align-items: center; gap: 28px; }
+  nav.links a { font-size: 14.5px; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+  nav.links a:hover { color: var(--text); }
+  .btn {
+    font-family: 'Manrope'; font-weight: 700; font-size: 14.5px;
+    padding: 10px 18px; border-radius: 10px; border: none; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+  .menu-btn { display: none; background: none; border: none; padding: 6px; cursor: pointer; }
+  .menu-btn svg { stroke: var(--text); }
+  @media (max-width: 780px) {
+    nav.links { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg);
+      border-bottom: 1px solid var(--border); flex-direction: column; align-items: stretch;
+      padding: 14px 20px 20px; gap: 4px; display: none; }
+    nav.links.open { display: flex; }
+    nav.links a { padding: 10px 4px; border-bottom: 1px solid var(--border); }
+    nav.links .btn { margin-top: 8px; align-self: flex-start; }
+    .menu-btn { display: block; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero { padding-block: 56px 0; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero-art { order: -1; } }
+  .hero h1 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.06; letter-spacing: -0.02em; }
+  .hero h1 .accent { color: var(--primary); }
+  .hero p.lead { font-size: 17.5px; color: var(--text-muted); max-width: 46ch; margin-top: 18px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .badge-soon {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: 10px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 700; color: var(--text-muted);
+  }
+  .badge-soon svg { width: 16px; height: 16px; }
+  .hero-art { position: relative; display: flex; justify-content: center; }
+  .hero-art .glow {
+    position: absolute; inset: 0; margin: auto; width: 340px; height: 340px;
+    background: radial-gradient(circle, var(--primary-tint) 0%, transparent 72%);
+    filter: blur(6px); z-index: 0;
+  }
+  .hero-art img { position: relative; z-index: 1; width: min(320px, 70vw); filter: drop-shadow(0 20px 34px rgba(20,30,70,0.22)); }
+
+  /* ticker */
+  .ticker-wrap {
+    margin-top: 56px; background: var(--navy); overflow: hidden; border-block: 1px solid var(--navy-2);
+  }
+  .ticker { display: flex; gap: 40px; white-space: nowrap; padding-block: 12px; animation: scroll-left 38s linear infinite; width: max-content; }
+  @media (prefers-reduced-motion: reduce) { .ticker { animation: none; overflow-x: auto; } }
+  .ticker span { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #B9C1E8; display: inline-flex; gap: 8px; align-items: center; }
+  .ticker span b { color: #fff; font-weight: 600; }
+  .ticker .up { color: #4ADE80; }
+  @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------- stats ---------- */
+  .stats { padding-block: 44px; border-bottom: 1px solid var(--border); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat b { font-family: 'Sora'; font-size: 30px; display: block; letter-spacing: -0.01em; }
+  .stat span { font-size: 13.5px; color: var(--text-muted); font-weight: 600; }
+
+  /* ---------- section headers ---------- */
+  .sec-head { max-width: 620px; margin-bottom: 42px; }
+  .sec-head h2 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.015em; }
+  .sec-head p { color: var(--text-muted); margin-top: 12px; font-size: 16px; }
+
+  /* ---------- features ---------- */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .feat-grid { grid-template-columns: 1fr; } }
+  .feat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .feat-icon {
+    width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+  }
+  .feat-icon svg { width: 21px; height: 21px; }
+  .feat-card h3 { font-size: 17px; }
+  .feat-card p { font-size: 14.5px; color: var(--text-muted); margin: 0; }
+
+  /* ---------- languages ---------- */
+  .lang-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .lang-chip {
+    display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--border); border-radius: 30px; padding: 10px 18px 10px 14px;
+    font-weight: 700; font-size: 14.5px;
+  }
+  .lang-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+  .lang-chip.soon { opacity: 0.6; }
+  .lang-chip.soon .dot { background: var(--text-muted); }
+  .lang-chip .native { color: var(--text-muted); font-weight: 500; }
+
+  /* ---------- pricing ---------- */
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 940px) { .price-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .price-grid { grid-template-columns: 1fr; } }
+  .price-card {
+    border: 1.5px solid var(--border); border-radius: 18px; padding: 26px 22px;
+    display: flex; flex-direction: column; background: var(--bg);
+  }
+  .price-card.best { border-color: var(--primary); position: relative; background: var(--primary-tint); }
+  .price-card .plan-badge {
+    position: absolute; top: -12px; left: 22px; background: var(--primary); color: #fff;
+    font-size: 11.5px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 20px;
+  }
+  .price-card .label { font-weight: 700; font-size: 15px; }
+  .price-card .duration { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+  .price-card .price-row { display: flex; align-items: baseline; gap: 8px; margin-top: 18px; }
+  .price-card .price-new { font-family: 'Sora'; font-size: 27px; font-weight: 800; }
+  .price-card .price-old { font-family: 'IBM Plex Mono'; font-size: 14px; color: var(--text-muted); text-decoration: line-through; }
+  .price-card .gst { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .price-card .save { margin-top: 10px; font-size: 12.5px; font-weight: 700; color: var(--success); }
+  .price-card .permonth { margin-top: auto; padding-top: 18px; font-family: 'IBM Plex Mono'; font-size: 12.5px; color: var(--text-muted); }
+  .price-note { margin-top: 22px; font-size: 13.5px; color: var(--text-muted); }
+  .price-note b { color: var(--text); }
+  .shared-feats { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: 10px 28px; }
+  @media (max-width: 560px) { .shared-feats { grid-template-columns: 1fr; } }
+  .shared-feats li { font-size: 14px; color: var(--text-muted); display: flex; gap: 9px; align-items: flex-start; }
+  .shared-feats svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; color: var(--success); }
+
+  /* ---------- books ---------- */
+  .book-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 940px) { .book-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .book-grid { grid-template-columns: 1fr; } }
+  .book-card {
+    border-radius: 16px; padding: 22px; color: #fff; display: flex; flex-direction: column; gap: 6px;
+    min-height: 168px; justify-content: flex-end; position: relative; overflow: hidden;
+  }
+  .book-card .book-lang { font-family: 'IBM Plex Mono'; font-size: 12px; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; }
+  .book-card .book-title { font-family: 'Sora'; font-weight: 700; font-size: 18px; margin-top: 4px; }
+  .book-card .book-price { margin-top: 10px; font-family: 'IBM Plex Mono'; font-weight: 600; font-size: 15px; }
+  .book-card.quiz { background: linear-gradient(135deg, #7C3AED, #4C1D95); }
+  .book-card.en { background: linear-gradient(135deg, #2E4BDE, #16226E); }
+  .book-card.ta { background: linear-gradient(135deg, #0B8B87, #084F4D); }
+  .book-card.hi { background: linear-gradient(135deg, #B8862A, #6E4E11); }
+  .books-note { margin-top: 22px; font-size: 13.5px; color: var(--text-muted); }
+
+  /* ---------- faq ---------- */
+  .faq { max-width: 760px; }
+  details.faq-item {
+    border-bottom: 1px solid var(--border); padding-block: 18px;
+  }
+  details.faq-item summary {
+    cursor: pointer; font-weight: 700; font-size: 16px; list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary .chev { transition: transform 0.2s ease; flex-shrink: 0; }
+  details.faq-item[open] summary .chev { transform: rotate(45deg); }
+  details.faq-item p { color: var(--text-muted); margin: 12px 0 0; font-size: 14.5px; max-width: 62ch; }
+
+  /* ---------- disclaimer ---------- */
+  .disclaimer {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 20px; font-size: 13px; color: var(--text-muted); display: flex; gap: 12px;
+  }
+  .disclaimer svg { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; color: var(--gold); }
+
+  /* ---------- cta band ---------- */
+  .cta-band {
+    background: var(--navy); color: #fff; border-radius: 22px; padding: 52px 40px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .cta-band h2 { color: #fff; font-size: clamp(24px, 3vw, 32px); }
+  .cta-band p { color: #A9B0CF; max-width: 48ch; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); padding-block: 40px; }
+  .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; font-family: 'Sora'; font-weight: 800; font-size: 17px; }
+  .footer-brand img { width: 28px; height: 28px; border-radius: 8px; }
+  .footer-tag { color: var(--text-muted); font-size: 13.5px; margin-top: 8px; max-width: 34ch; }
+  .footer-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+  .footer-col h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 12px; }
+  .footer-col a { display: block; font-size: 14px; color: var(--text); text-decoration: none; margin-bottom: 9px; }
+  .footer-bottom { margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><img src="assets/logo.png" alt="Niveshaa" />Niveshaa</a>
+    <nav class="links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#languages">Languages</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#books">Books</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pricing" class="btn btn-primary">Get started</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Stock market education, in your language</div>
+        <h1>Learn the market the way <span class="accent">someone's actually teaching you.</span></h1>
+        <p class="lead">50 structured lessons, a paper trading simulator, a daily quiz &amp; leaderboard, and an AI coach that clears your doubts — Beginner to Advanced, in English, Tamil or Hindi.</p>
+        <div class="hero-ctas">
+          <span class="badge-soon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            Launching soon on Google Play
+          </span>
+          <a href="#books" class="btn btn-ghost">Get the lesson books →</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="glow"></div>
+        <img src="assets/mascot.png" alt="Niveshaa AI coach — a bull mascot in a suit holding a tablet with a rising price chart" />
+      </div>
+    </div>
+
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker" id="tickerTrack">
+        <span><b>L1</b> What is the Stock Market? <span class="up">▲</span></span>
+        <span><b>L16</b> Reading a Balance Sheet <span class="up">▲</span></span>
+        <span><b>L19</b> Understanding P/E Ratio <span class="up">▲</span></span>
+        <span><b>L23</b> Technical Analysis Basics <span class="up">▲</span></span>
+        <span><b>L30</b> Diversification <span class="up">▲</span></span>
+        <span><b>L36</b> Chart Patterns <span class="up">▲</span></span>
+        <span><b>L40</b> Options, Explained Simply <span class="up">▲</span></span>
+        <span><b>L50</b> Building Your Own Strategy <span class="up">▲</span></span>
+        <span><b>L1</b> What is the Stock Market? <span class="up">▲</span></span>
+        <span><b>L16</b> Reading a Balance Sheet <span class="up">▲</span></span>
+        <span><b>L19</b> Understanding P/E Ratio <span class="up">▲</span></span>
+        <span><b>L23</b> Technical Analysis Basics <span class="up">▲</span></span>
+        <span><b>L30</b> Diversification <span class="up">▲</span></span>
+        <span><b>L36</b> Chart Patterns <span class="up">▲</span></span>
+        <span><b>L40</b> Options, Explained Simply <span class="up">▲</span></span>
+        <span><b>L50</b> Building Your Own Strategy <span class="up">▲</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><b class="mono">50</b><span>Structured lessons</span></div>
+      <div class="stat"><b class="mono">3</b><span>Languages live today</span></div>
+      <div class="stat"><b class="mono">3</b><span>Difficulty tiers</span></div>
+      <div class="stat"><b class="mono">24/7</b><span>AI coach on every lesson</span></div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">What's inside</div>
+        <h2>Everything you need to actually learn, not just scroll past.</h2>
+        <p>Every plan unlocks the same thing — the difference is only how long you keep it.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--primary-tint)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>50 structured lessons</h3>
+          <p>Beginner to Advanced — read at your pace, in your language, and mark each one complete.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--gold-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4M17 6h3a2 2 0 0 1-2 4"/></svg>
+          </div>
+          <h3>Daily quiz &amp; leaderboard</h3>
+          <p>10 questions a day pulled from the lessons, markets and news — see how you rank against other learners.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--teal-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+          </div>
+          <h3>Daily checklist</h3>
+          <p>A simple routine — lesson, quiz, news, practice — to keep your learning consistent instead of one-and-done.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--purple-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4.2-1.1L3 20l1.1-5.3A8.5 8.5 0 1 1 21 11.5z"/></svg>
+          </div>
+          <h3>Ask the AI coach, anytime</h3>
+          <p>Stuck on something? Open any lesson and ask — get guidance and doubt-clearing on the spot.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--primary-tint)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg>
+          </div>
+          <h3>Paper trading simulator</h3>
+          <p>Practice with live charts and virtual money — no real rupees at risk while you're still learning.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:var(--teal-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M9 21h6M12 17v4M16 15l3 3 5-5"/></svg>
+          </div>
+          <h3>Trading journal</h3>
+          <p>Log every paper trade and get AI insights on your own win-rate and patterns — not generic tips.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Learn in your language</div>
+        <h2>The market doesn't need to be taught to you in English.</h2>
+        <p>Technical terms like "stop-loss" or "P/E ratio" stay in English — everything else is translated properly, not machine-mangled.</p>
+      </div>
+      <div class="lang-row">
+        <div class="lang-chip"><span class="dot"></span>English</div>
+        <div class="lang-chip"><span class="dot"></span>Tamil <span class="native">தமிழ்</span></div>
+        <div class="lang-chip"><span class="dot"></span>Hindi <span class="native">हिन्दी</span></div>
+        <div class="lang-chip soon"><span class="dot"></span>Telugu <span class="native">తెలుగు</span> · soon</div>
+        <div class="lang-chip soon"><span class="dot"></span>Kannada <span class="native">ಕನ್ನಡ</span> · soon</div>
+        <div class="lang-chip soon"><span class="dot"></span>Malayalam <span class="native">മലയാളം</span> · soon</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Membership</div>
+        <h2>One membership. Everything unlocked.</h2>
+        <p>All 50 lessons, the paper trading simulator, your journal and the AI coach — on every plan. Longer plans just cost less per month.</p>
+      </div>
+
+      <div class="price-grid">
+        <div class="price-card">
+          <div class="label">Monthly</div>
+          <div class="duration">1 month</div>
+          <div class="price-row"><span class="price-new mono">₹135</span><span class="price-old mono">₹142</span></div>
+          <div class="gst">+GST · ₹159 total · first month</div>
+          <div class="permonth mono">₹142/month after</div>
+        </div>
+        <div class="price-card">
+          <div class="label">3 Months</div>
+          <div class="duration">3 months</div>
+          <div class="price-row"><span class="price-new mono">₹379</span><span class="price-old mono">₹399</span></div>
+          <div class="gst">+GST · ₹447 total · first term</div>
+          <div class="save">Save 6% vs monthly</div>
+          <div class="permonth mono">₹133/month</div>
+        </div>
+        <div class="price-card">
+          <div class="label">6 Months</div>
+          <div class="duration">6 months</div>
+          <div class="price-row"><span class="price-new mono">₹712</span><span class="price-old mono">₹749</span></div>
+          <div class="gst">+GST · ₹840 total · first term</div>
+          <div class="save">Save 12% vs monthly</div>
+          <div class="permonth mono">₹125/month</div>
+        </div>
+        <div class="price-card best">
+          <span class="plan-badge">Best value</span>
+          <div class="label">Annual</div>
+          <div class="duration">12 months</div>
+          <div class="price-row"><span class="price-new mono">₹1,358</span><span class="price-old mono">₹1,429</span></div>
+          <div class="gst">+GST · ₹1,602 total · first term</div>
+          <div class="save">Save 16% vs monthly</div>
+          <div class="permonth mono">₹119/month</div>
+        </div>
+      </div>
+
+      <ul class="shared-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>All 50 lessons — Beginner to Advanced</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Full paper trading simulator with live charts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Trading journal with win-rate &amp; performance charts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Daily quiz + leaderboard access</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Unlimited AI coach doubt-clearing on every lesson</li>
+      </ul>
+
+      <p class="price-note"><b>New here?</b> Your first term is automatically 5% off, shown above — it's a real first-time price, not an inflated "original" crossed out for show. Prices shown are subject to GST.</p>
+    </div>
+  </section>
+
+  <section id="books">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Prefer to read?</div>
+        <h2>The full course, as a book.</h2>
+        <p>The same 50 lessons, typeset as a PDF you can read anywhere — plus a 500-question daily quiz booklet with a full answer key.</p>
+      </div>
+      <div class="book-grid">
+        <div class="book-card en">
+          <div class="book-lang">English</div>
+          <div class="book-title">Niveshaa Trading Guide</div>
+          <div class="book-price">₹149</div>
+        </div>
+        <div class="book-card ta">
+          <div class="book-lang">Tamil</div>
+          <div class="book-title">நிவேஷா டிரேடிங் வழிகாட்டி</div>
+          <div class="book-price">₹149</div>
+        </div>
+        <div class="book-card hi">
+          <div class="book-lang">Hindi</div>
+          <div class="book-title">निवेशा ट्रेडिंग गाइड</div>
+          <div class="book-price">₹149</div>
+        </div>
+        <div class="book-card quiz">
+          <div class="book-lang">All languages</div>
+          <div class="book-title">Daily Quiz Booklet</div>
+          <div class="book-price">₹79</div>
+        </div>
+      </div>
+      <p class="books-note">Books are sold inside the Niveshaa app, and are included at no extra cost once you own all three lesson tiers or hold a membership.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Questions</div>
+        <h2>Before you ask</h2>
+      </div>
+      <div class="faq">
+        <details class="faq-item" open>
+          <summary>Does Niveshaa give buy/sell signals or investment advice?<span class="chev mono">+</span></summary>
+          <p>No. Niveshaa teaches concepts and lets you practice with a paper trading simulator using virtual money. It is an educational platform, not a source of investment advice or trading signals.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is real money involved anywhere?<span class="chev mono">+</span></summary>
+          <p>Only for your membership or book purchase, paid through Razorpay. The paper trading simulator itself uses virtual money — nothing you do inside it touches real markets.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which languages are supported right now?<span class="chev mono">+</span></summary>
+          <p>English, Tamil and Hindi are fully available today, lesson-for-lesson. Telugu, Kannada and Malayalam are planned next.</p>
+        </details>
+        <details class="faq-item">
+          <summary>When is the app launching?<span class="chev mono">+</span></summary>
+          <p>Niveshaa is in final testing ahead of its Google Play launch. The lesson books are already available — see the Books section above.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I cancel my membership?<span class="chev mono">+</span></summary>
+          <p>Yes — memberships run for the term you choose (monthly, 3, 6 or 12 months) and simply don't renew if you choose not to continue.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="disclaimer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <span>Trading and investing carry real financial risk. Niveshaa is an educational tool — lessons, a paper trading simulator using virtual money, and general market information. Nothing on this app or website is investment advice, and past or simulated performance does not guarantee future results.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Start where every trader should — with the basics, done right.</h2>
+        <p>50 lessons. A daily quiz. An AI coach that never gets tired of your questions.</p>
+        <a href="#pricing" class="btn btn-primary" style="margin-top:8px;">See membership plans</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="assets/logo.png" alt="Niveshaa" />Niveshaa</div>
+        <p class="footer-tag">A stock market learning app for India, in the language you actually think in.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#books">Books</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#faq">FAQ</a>
+          <a href="mailto:support@niveshaa.co.in">Support</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Niveshaa. All rights reserved.</span>
+      <span>niveshaa.co.in</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
+    });
+  }
+</script>
+
+</body>
+</html>
