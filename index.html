@@ -231,6 +231,13 @@
   .price-card {
     border: 1.5px solid var(--border); border-radius: 18px; padding: 26px 22px;
     display: flex; flex-direction: column; background: var(--bg);
+    cursor: default; position: relative;
+  }
+  .price-card .in-app-tag {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted);
+    font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
   }
   .price-card.best { border-color: var(--primary); position: relative; background: var(--primary-tint); }
   .price-card .plan-badge {
@@ -260,6 +267,13 @@
   .book-card {
     border-radius: 16px; padding: 22px; color: #fff; display: flex; flex-direction: column; gap: 6px;
     min-height: 168px; justify-content: flex-end; position: relative; overflow: hidden;
+    cursor: default;
+  }
+  .book-card .in-app-tag {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35); color: #fff;
+    font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
   }
   .book-card .book-lang { font-family: 'IBM Plex Mono'; font-size: 12px; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; }
   .book-card .book-title { font-family: 'Sora'; font-weight: 700; font-size: 18px; margin-top: 4px; }
@@ -465,14 +479,14 @@
       </div>
 
       <div class="price-grid">
-        <div class="price-card">
+        <div class="price-card"><span class="in-app-tag">In the app</span>
           <div class="label">Monthly</div>
           <div class="duration">1 month</div>
           <div class="price-row"><span class="price-new mono">₹135</span><span class="price-old mono">₹142</span></div>
           <div class="gst">+GST · ₹159 total · first month</div>
           <div class="permonth mono">₹142/month after</div>
         </div>
-        <div class="price-card">
+        <div class="price-card"><span class="in-app-tag">In the app</span>
           <div class="label">3 Months</div>
           <div class="duration">3 months</div>
           <div class="price-row"><span class="price-new mono">₹379</span><span class="price-old mono">₹399</span></div>
@@ -480,7 +494,7 @@
           <div class="save">Save 6% vs monthly</div>
           <div class="permonth mono">₹133/month</div>
         </div>
-        <div class="price-card">
+        <div class="price-card"><span class="in-app-tag">In the app</span>
           <div class="label">6 Months</div>
           <div class="duration">6 months</div>
           <div class="price-row"><span class="price-new mono">₹712</span><span class="price-old mono">₹749</span></div>
@@ -488,7 +502,7 @@
           <div class="save">Save 12% vs monthly</div>
           <div class="permonth mono">₹125/month</div>
         </div>
-        <div class="price-card best">
+        <div class="price-card best"><span class="in-app-tag">In the app</span>
           <span class="plan-badge">Best value</span>
           <div class="label">Annual</div>
           <div class="duration">12 months</div>
@@ -519,22 +533,22 @@
         <p>The same 50 lessons, typeset as a PDF you can read anywhere — plus a 500-question daily quiz booklet with a full answer key.</p>
       </div>
       <div class="book-grid">
-        <div class="book-card en">
+        <div class="book-card en"><span class="in-app-tag">In the app</span>
           <div class="book-lang">English</div>
           <div class="book-title">Niveshaa Trading Guide</div>
           <div class="book-price">₹149</div>
         </div>
-        <div class="book-card ta">
+        <div class="book-card ta"><span class="in-app-tag">In the app</span>
           <div class="book-lang">Tamil</div>
           <div class="book-title">நிவேஷா டிரேடிங் வழிகாட்டி</div>
           <div class="book-price">₹149</div>
         </div>
-        <div class="book-card hi">
+        <div class="book-card hi"><span class="in-app-tag">In the app</span>
           <div class="book-lang">Hindi</div>
           <div class="book-title">निवेशा ट्रेडिंग गाइड</div>
           <div class="book-price">₹149</div>
         </div>
-        <div class="book-card quiz">
+        <div class="book-card quiz"><span class="in-app-tag">In the app</span>
           <div class="book-lang">All languages</div>
           <div class="book-title">Daily Quiz Booklet</div>
           <div class="book-price">₹79</div>
